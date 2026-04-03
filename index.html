@@ -135,14 +135,7 @@
         }
 
         /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-dark);
-        }
+        /* Removed - toggle button disabled */
 
         /* ============================================================
            HERO SECTION
@@ -613,28 +606,10 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: var(--white);
-                flex-direction: column;
-                gap: 0;
-                box-shadow: var(--shadow-sm);
-                padding: 1rem;
             }
 
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                padding: 1rem;
-                border-bottom: 1px solid var(--border-color);
-            }
-
-            .menu-toggle {
-                display: block;
+            .nav-linkedin {
+                display: none;
             }
 
             .hero {
@@ -688,7 +663,6 @@
             }
         }
 
-        /* Mobile phones */
         @media (max-width: 480px) {
             nav {
                 padding: 1rem 1.5rem;
@@ -754,8 +728,6 @@
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="https://linkedin.com/in/shakir-s" target="_blank" rel="noopener noreferrer" class="nav-linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
             </ul>
-            <!-- Mobile menu toggle button -->
-            <button class="menu-toggle" id="menuToggle">☰</button>
         </div>
     </nav>
 
@@ -1047,24 +1019,6 @@
          JAVASCRIPT
          ================================================================ -->
     <script>
-        // ================================================================
-        // MOBILE MENU TOGGLE
-        // ================================================================
-        // Toggle mobile menu when hamburger button is clicked
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
         // ================================================================
         // SCROLL ANIMATIONS
         // ================================================================
