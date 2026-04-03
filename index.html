@@ -135,7 +135,32 @@
         }
 
         /* Mobile menu toggle */
-        /* Removed - toggle button disabled */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -8px);
+        }
 
         /* ============================================================
            HERO SECTION
@@ -604,12 +629,49 @@
         
         /* Tablet and smaller screens */
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
             .nav-links {
-                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                gap: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                padding: 0;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                max-height: 400px;
+                padding: 1.5rem 0;
+            }
+
+            .nav-links li {
+                padding: 0.75rem 2rem;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+                display: flex;
+                justify-content: center;
+                padding: 1rem 2rem;
+            }
+
+            .nav-container {
+                position: relative;
             }
 
             .nav-linkedin {
-                display: none;
+                display: inline-flex;
             }
 
             .hero {
@@ -719,7 +781,12 @@
     <nav>
         <div class="nav-container">
             <div class="nav-logo">Mohamed Shakir S</div>
-            <ul class="nav-links">
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -1019,6 +1086,33 @@
          JAVASCRIPT
          ================================================================ -->
     <script>
+        // ================================================================
+        // MOBILE MENU TOGGLE
+        // ================================================================
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('nav')) {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
         // ================================================================
         // SCROLL ANIMATIONS
         // ================================================================
